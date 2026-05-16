@@ -6,7 +6,7 @@ DocRestoreAI is a Computer Vision application designed to restore damaged, noisy
 
 The system takes a damaged document image or scanned PDF as input and generates a cleaner, more readable version using an image-to-image translation pipeline.
 
-The project combines classical Computer Vision techniques with a deep learning generative model based on Pix2Pix GAN.
+The project combines classical Computer Vision techniques with a deep learning generative model based on a Pix2Pix-style GAN.
 
 ```text
 Input:  damaged / noisy / skewed document image or PDF
@@ -45,12 +45,13 @@ The system is designed only for document restoration and readability enhancement
 - Apply optional post-processing
 - Evaluate the model with PSNR, SSIM, FID, OCR readability, and qualitative analysis
 - Use a Streamlit web app for easy interaction
+- Generate a Technical Analysis PDF with experimental results
 
 ---
 
 ## Project Pipeline
 
-The application follows a complete Computer Vision pipeline:
+The application follows a complete Computer Vision pipeline.
 
 ### 1. Data Acquisition and Preprocessing
 
@@ -161,8 +162,6 @@ PatchGAN evaluates small patches of the image instead of judging the whole image
 ## Repository Structure
 
 ```text
-
-
 docrestore-ai/
 │
 ├── app/
@@ -221,13 +220,29 @@ docrestore-ai/
 
 ---
 
+## Utility Scripts
+
+The `scripts/` folder contains helper scripts used to test, prepare, and clean the project.
+
+| Script | Purpose |
+|---|---|
+| `sanity_check.py` | Checks folders, files, libraries, models, and dataset availability |
+| `create_sample_documents.py` | Creates synthetic clean document images for testing |
+| `create_demo_input.py` | Creates a damaged test document image |
+| `create_demo_pdf.py` | Creates a demo PDF from the damaged image |
+| `run_full_demo.py` | Runs the full demo pipeline |
+| `update_technical_report.py` | Updates the technical report with evaluation results |
+| `clean.py` | Removes large generated files before GitHub upload |
+
+---
+
 ## Installation
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/docrestore-ai.git
-cd docrestore-ai
+git clone https://github.com/fehdamara/DocRestore-AI.git
+cd DocRestore-AI
 ```
 
 ### 2. Create a virtual environment
@@ -235,15 +250,15 @@ cd docrestore-ai
 On Windows:
 
 ```powershell
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
 On macOS or Linux:
 
 ```bash
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 ```
 
 ### 3. Install dependencies
@@ -258,6 +273,8 @@ If PyTorch is not installed correctly, install it manually:
 ```bash
 python -m pip install torch torchvision torchaudio
 ```
+
+Note: In cloud environments such as GitHub Codespaces, the project uses `opencv-python-headless` to avoid Linux graphical dependency errors such as `libGL.so.1`.
 
 ---
 
@@ -286,6 +303,37 @@ Supported image formats:
 - JPEG
 - BMP
 - TIFF
+
+For a quick test, synthetic clean documents can be generated with:
+
+```bash
+python scripts/create_sample_documents.py
+```
+
+---
+
+## Quick Demo
+
+To run a complete local demo pipeline, use:
+
+```bash
+python scripts/run_full_demo.py
+```
+
+This script creates sample documents, generates a damaged image and PDF, runs a quick training test, performs inference, evaluates the model, and checks the final outputs.
+
+Alternatively, the commands can be run manually:
+
+```bash
+python scripts/create_sample_documents.py
+python scripts/create_demo_input.py
+python scripts/create_demo_pdf.py
+python scripts/sanity_check.py
+python -m src.train --epochs 2 --batch_size 1
+python -m src.inference --input_path data/samples/test_document.png --output_path outputs/restored_images/test_document_restored.png --postprocess
+python -m src.evaluate --max_samples 5
+python scripts/update_technical_report.py
+```
 
 ---
 
@@ -320,6 +368,8 @@ Training logs will be saved in:
 ```text
 outputs/metrics/training_log.txt
 ```
+
+Note: Trained model checkpoint files such as `final_model.pth` are not included in the GitHub repository because they can be very large. To generate the model checkpoint, run the training command locally.
 
 ---
 
@@ -415,14 +465,25 @@ If the model is not trained yet, the app can still be tested with the classical 
 
 The system is evaluated using quantitative and qualitative metrics.
 
-Example result table:
+| Metric | Description | Expected Goal |
+|---|---|---|
+| PSNR | Pixel-level reconstruction quality | Higher is better |
+| SSIM | Structural similarity | Higher is better |
+| FID | Realism of generated images | Lower is better |
+| OCR Improvement | Text readability improvement | Positive value is better |
 
-| Metric          | Description                        | Expected Goal            |
-| --------------- | ---------------------------------- | ------------------------ |
-| PSNR            | Pixel-level reconstruction quality | Higher is better         |
-| SSIM            | Structural similarity              | Higher is better         |
-| FID             | Realism of generated images        | Lower is better          |
-| OCR Improvement | Text readability improvement       | Positive value is better |
+### Demo Evaluation Results
+
+The following results were obtained using a small synthetic demo dataset and a short training run:
+
+| Metric | Result |
+|---|---|
+| Average PSNR | 9.4048 |
+| Average SSIM | 0.0793 |
+| FID Score | Not computed |
+| Average OCR Improvement | Not available |
+
+These results are only from a short demo training session. Better results are expected with a larger dataset and more training epochs.
 
 Example qualitative comparison:
 
@@ -431,6 +492,25 @@ Damaged Input | Generated Restoration | Clean Target
 ```
 
 The final Technical Analysis Document includes detailed results, tables, plots, and failure analysis.
+
+---
+
+## Technical Analysis Document
+
+The technical analysis document is available in:
+
+```text
+docs/technical_analysis.pdf
+```
+
+It contains:
+
+- problem statement
+- methodology
+- architecture explanation
+- experimental results
+- failure analysis
+- ethical considerations
 
 ---
 
@@ -446,6 +526,8 @@ The model may fail in some situations, such as:
 - pages with heavy stains or missing content
 
 Since document restoration is an image generation task, the model may sometimes generate visually plausible results that are not perfectly faithful to the original document.
+
+The demo results are limited because the model was trained for only a few epochs on a small synthetic dataset.
 
 ---
 
@@ -464,12 +546,14 @@ It should not be used to:
 
 The restored output should be treated as an enhanced visual version, not as proof of original document authenticity.
 
+Documents may contain personal or sensitive information. Users should avoid uploading confidential documents to untrusted environments.
+
 ---
 
 ## Technologies Used
 
 - Python
-- OpenCV
+- OpenCV / opencv-python-headless
 - PyTorch
 - Torchvision
 - NumPy
@@ -481,6 +565,19 @@ The restored output should be treated as an enhanced visual version, not as proo
 - Streamlit
 - pytesseract
 - clean-fid
+- ReportLab
+
+---
+
+## GitHub Cleanup
+
+Before pushing to GitHub, generated files and large model checkpoints can be removed with:
+
+```bash
+python scripts/clean.py
+```
+
+This removes large files such as `.pth` checkpoints and generated outputs while keeping the project structure.
 
 ---
 
@@ -488,8 +585,14 @@ The restored output should be treated as an enhanced visual version, not as proo
 
 Project developed for the Computer Vision final project.
 
+Repository:
+
+```text
+https://github.com/fehdamara/DocRestore-AI
+```
+
 ---
 
 ## License
 
-This project is released for educational purposes.
+This project is released under the MIT License for educational purposes.
