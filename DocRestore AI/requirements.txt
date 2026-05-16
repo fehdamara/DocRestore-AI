@@ -1,0 +1,16 @@
+opencv-python
+numpy
+pandas
+matplotlib
+scikit-learn
+scikit-image
+torch
+torchvision
+Pillow
+tqdm
+streamlit
+PyMuPDF
+pytesseract
+torchmetrics
+clean-fid
+reportlab
