@@ -1,0 +1,33 @@
+# Core numerical libraries
+numpy
+pandas
+
+# Image processing and Computer Vision
+opencv-python
+Pillow
+scikit-image
+scikit-learn
+
+# Deep learning
+torch
+torchvision
+torchaudio
+
+# Training utilities
+tqdm
+
+# Plotting and results visualization
+matplotlib
+
+# PDF processing
+PyMuPDF
+reportlab
+
+# OCR support
+pytesseract
+
+# Web application
+streamlit
+
+# Optional FID evaluation
+clean-fid
