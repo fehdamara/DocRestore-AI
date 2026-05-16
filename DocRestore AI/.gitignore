@@ -1,0 +1,50 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.env/
+
+# Dataset folders
+data/raw/*
+data/clean/*
+data/damaged/*
+data/samples/*
+
+# Keep folder structure
+!data/raw/.gitkeep
+!data/clean/.gitkeep
+!data/damaged/.gitkeep
+!data/samples/.gitkeep
+
+# Output files
+outputs/restored_images/*
+outputs/restored_pdfs/*
+outputs/plots/*
+outputs/metrics/*
+outputs/checkpoints/*
+outputs/generated_samples/*
+outputs/evaluation/*
+
+# Keep output folder structure
+!outputs/restored_images/.gitkeep
+!outputs/restored_pdfs/.gitkeep
+!outputs/plots/.gitkeep
+!outputs/metrics/.gitkeep
+!outputs/checkpoints/.gitkeep
+!outputs/generated_samples/.gitkeep
+!outputs/evaluation/.gitkeep
+
+# Model checkpoints
+*.pth
+*.pt
+*.h5
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
