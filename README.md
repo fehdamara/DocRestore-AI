@@ -161,7 +161,12 @@ PatchGAN evaluates small patches of the image instead of judging the whole image
 ## Repository Structure
 
 ```text
+
+
 docrestore-ai/
+│
+├── app/
+│   └── streamlit_app.py
 │
 ├── data/
 │   ├── raw/
@@ -169,7 +174,31 @@ docrestore-ai/
 │   ├── damaged/
 │   └── samples/
 │
+├── docs/
+│   ├── technical_analysis.md
+│   ├── technical_analysis.pdf
+│   └── create_technical_pdf.py
+│
+├── outputs/
+│   ├── restored_images/
+│   ├── restored_pdfs/
+│   ├── plots/
+│   ├── metrics/
+│   ├── checkpoints/
+│   ├── generated_samples/
+│   └── evaluation/
+│
+├── scripts/
+│   ├── clean.py
+│   ├── sanity_check.py
+│   ├── create_sample_documents.py
+│   ├── create_demo_input.py
+│   ├── create_demo_pdf.py
+│   ├── run_full_demo.py
+│   └── update_technical_report.py
+│
 ├── src/
+│   ├── __init__.py
 │   ├── preprocessing.py
 │   ├── degradation.py
 │   ├── dataset.py
@@ -180,27 +209,14 @@ docrestore-ai/
 │   ├── pdf_utils.py
 │   ├── utils.py
 │   └── models/
+│       ├── __init__.py
 │       ├── generator.py
 │       └── discriminator.py
 │
-├── app/
-│   └── streamlit_app.py
-│
-├── outputs/
-│   ├── restored_images/
-│   ├── restored_pdfs/
-│   ├── plots/
-│   ├── metrics/
-│   ├── checkpoints/
-│   └── generated_samples/
-│
-├── docs/
-│   └── technical_analysis.pdf
-│
-├── requirements.txt
-├── README.md
 ├── .gitignore
-└── LICENSE
+├── LICENSE
+├── README.md
+└── requirements.txt
 ```
 
 ---
