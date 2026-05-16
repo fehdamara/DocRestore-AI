@@ -1,0 +1,14 @@
+DocRestoreAI Evaluation Summary
+================================
+
+Number of evaluated samples: 5
+Average PSNR: 9.4048
+Average SSIM: 0.0793
+FID Score: Not computed
+Average OCR Improvement: Not available
+
+Interpretation:
+- Higher PSNR means better pixel-level reconstruction.
+- Higher SSIM means better structural similarity.
+- Lower FID means generated images are closer to real clean documents.
+- Positive OCR improvement means restored images are more readable.

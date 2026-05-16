@@ -1,0 +1,12 @@
+epoch,generator_loss,discriminator_loss
+1,80.134883,0.604728
+2,56.286632,0.364528
+epoch,generator_loss,discriminator_loss
+1,80.134883,0.604728
+2,56.286632,0.364528
+epoch,generator_loss,discriminator_loss
+1,80.133316,0.604261
+2,56.272698,0.363678
+epoch,generator_loss,discriminator_loss
+1,80.133316,0.604261
+2,56.272698,0.363678
