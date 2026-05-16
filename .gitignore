@@ -1,11 +1,17 @@
+cat > .gitignore <<'EOF'
 # Python cache files
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 
-# Virtual environment
+# Virtual environments
+.venv/
 venv/
-.env/
+env/
+
+# Environment files
+.env
 
 # Dataset folders
 data/raw/*
@@ -13,13 +19,13 @@ data/clean/*
 data/damaged/*
 data/samples/*
 
-# Keep folder structure
+# Keep dataset folder structure
 !data/raw/.gitkeep
 !data/clean/.gitkeep
 !data/damaged/.gitkeep
 !data/samples/.gitkeep
 
-# Output files
+# Output folders
 outputs/restored_images/*
 outputs/restored_pdfs/*
 outputs/plots/*
@@ -41,15 +47,12 @@ outputs/evaluation/*
 *.pth
 *.pt
 *.h5
-
-# System files
-.DS_Store
-Thumbs.db
+*.ckpt
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
-# Virtual environments
-.venv/
-venv/
-env/
+# System files
+.DS_Store
+Thumbs.db
+EOF
